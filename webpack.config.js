@@ -4,22 +4,23 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 module.exports = {
-  // Входной файл
+  // Entry file
   entry: [
     './src/js/index.js'
   ],
 
-  // Выходной файл
+  // Output file
   output: {
-    filename: './js/bundle.js'
+    filename: './js/bundle.min.js',
+    path: path.resolve(__dirname, 'dist') // Add output path
   },
 
-  // Source maps для удобства отладки
+  // Source maps for easier debugging
   devtool: "source-map",
 
   module: {
     rules: [
-      // Транспилируем js с babel
+      // Transpile js with babel
       {
         test: /\.js$/,
         include: path.resolve(__dirname, 'src/js'),
@@ -32,7 +33,7 @@ module.exports = {
         }
       },
 
-      // Компилируем SCSS в CSS
+      // Compile SCSS to CSS
       {
         test: /\.scss$/,
         use: [
@@ -43,31 +44,29 @@ module.exports = {
         ],
       },
 
-      // Подключаем шрифты из css
+      // Include fonts from css
       {
         test: /\.(eot|ttf|woff|woff2)$/,
-        use: [
-          {
-            loader: 'file-loader?name=./fonts/[name].[ext]'
-          },
-        ]
+        type: 'asset/resource',
+        generator: {
+          filename: 'fonts/[name][ext]'
+        }
       },
 
-      // Подключаем картинки из css
+      // Include images from css
       {
         test: /\.(svg|png|jpg|jpeg|webp)$/,
-        use: [
-          {
-            loader: 'file-loader?name=./static/[name].[ext]'
-          },
-        ]
+        type: 'asset/resource',
+        generator: {
+          filename: 'static/[name][ext]'
+        }
       },
     ],
   },
   plugins: [
-    // Подключаем файл html, стили и скрипты встроятся автоматически
+    // Include html file, styles and scripts will be automatically injected
     new HtmlWebpackPlugin({
-      title: 'Webpack 4 Starter',
+      title: 'Webpack 5 Starter',
       template: './src/index.html',
       inject: true,
       minify: {
@@ -76,17 +75,35 @@ module.exports = {
       }
     }),
 
-    // Кладем стили в отдельный файлик
+    // Extract styles to a separate file
     new MiniCssExtractPlugin({
       filename: 'style.css',
     }),
 
-    // Копируем картинки
-    new CopyWebpackPlugin([
-      {
-        from: './src/img',
-        to: 'img',
-      },
-    ])
+    new MiniCssExtractPlugin({
+      filename: 'swiper-bundle.min.css',
+    }),
+
+    // Copy images
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: './src/img',
+          to: 'img',
+        },
+      ]
+    })
   ],
+  devServer: {
+    static: path.join(__dirname, 'dist'), // Updated from contentBase
+    compress: true,
+    port: 9000,
+    hot: true, // Enable Hot Module Replacement
+    watchFiles: {
+      paths: ['src/**/*'], // Watch for changes in source files
+    },
+    client: {
+      overlay: true // Show errors and warnings in the browser
+    }
+  },
 };
