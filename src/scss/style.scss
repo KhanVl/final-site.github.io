@@ -461,6 +461,31 @@ a:hover {
   color: #1b1c21;
 }
 
+.toggle-button,
+.brands-button__more,
+.section-type__button{
+  display: inline-flex;
+  align-items: center;
+  color: #1B1C21;
+}
+
+.toggle-button.hidden,
+.brands-button__more.hidden,
+.section-type__button.hidden{
+  display: none;
+  margin-top: 10px;
+}
+
+.icon.rotate{
+  transform: rotate(180deg);
+}
+
+.content-text__more,
+.brands-items__inner.second-block,
+.section-types__inner.second-block{
+  display: none;
+}
+
 .block__button {
   font-size: 16px;
   font-weight: 500;
@@ -526,8 +551,13 @@ a:hover {
 .section-types__inner {
   display: flex;
   flex-wrap: wrap;
-  padding: 24px 0 50px;
+  padding-top: 24px;
 }
+
+.section-types{
+  padding-bottom: 30px;
+}
+
 
 .section-type {
   margin-right: 32px;
@@ -1313,6 +1343,11 @@ a:hover {
   }
 
   .brands-button{
+    display: none;
+  }
+
+  .brands-button__more,
+  .section-type__button{
     display: none;
   }
 

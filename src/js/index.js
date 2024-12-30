@@ -3,22 +3,63 @@ import '../scss/style.scss'
 console.log('Works!')
 
 
-function readMore() {
-    var dots = document.getElementById("dots");
-    var more = document.getElementById("more");
-    var btn = document.getElementById("btn");
+// Код для первой кнопки "Показать все" и "Скрыть"
+const showButton1 = document.querySelector('.toggle-button:not(.hidden)');
+const hideButton1 = document.querySelector('.toggle-button.hidden');
+const additionalItems1 = document.querySelector('.content-text__more');
 
-    if(dots.style.display === "none") {
-        dots.style.display="inline";
-        btn.innerHTML="Читать далее";
-        more.style.display="none";
-    } else{
-        dots.style.display="none";
-        btn.innerHTML="Скрыть";
-        more.style.display="inline";
-    }
-    
-}
+// Обработчик для кнопки "Показать все"
+showButton1.addEventListener('click', function () {
+    additionalItems1.style.display = 'inline-flex';
+    showButton1.style.display = 'none'; // Скрываем верхнюю кнопку
+    hideButton1.style.display = 'inline-flex'; // Показываем кнопку "Скрыть"
+});
+
+// Обработчик для кнопки "Скрыть"
+hideButton1.addEventListener('click', function () {
+    additionalItems1.style.display = 'none';
+    showButton1.style.display = 'inline-flex'; // Показываем верхнюю кнопку
+    hideButton1.style.display = 'none'; // Скрываем кнопку "Скрыть"
+});
+
+// Код для второй кнопки "Показать все" и "Скрыть"
+const showButton2 = document.querySelector('.brands-button__more:not(.hidden)');
+const hideButton2 = document.querySelector('.brands-button__more.hidden');
+const additionalItems2 = document.querySelector('.brands-items__inner.second-block');
+
+// Обработчик для кнопки "Показать все"
+showButton2.addEventListener('click', function () {
+    additionalItems2.style.display = 'inline-flex';
+    showButton2.style.display = 'none'; // Скрываем верхнюю кнопку
+    hideButton2.style.display = 'inline-flex'; // Показываем кнопку "Скрыть"
+});
+
+// Обработчик для кнопки "Скрыть"
+hideButton2.addEventListener('click', function () {
+    additionalItems2.style.display = 'none';
+    showButton2.style.display = 'inline-flex'; // Показываем верхнюю кнопку
+    hideButton2.style.display = 'none'; // Скрываем кнопку "Скрыть"
+});
+
+
+// Код для третьей кнопки "Показать все" и "Скрыть"
+const showButton3 = document.querySelector('.section-type__button:not(.hidden)');
+const hideButton3 = document.querySelector('.section-type__button.hidden');
+const additionalItems3 = document.querySelector('.section-types__inner.second-block');
+
+// Обработчик для кнопки "Показать все"
+showButton3.addEventListener('click', function () {
+    additionalItems3.style.display = 'flex';
+    showButton3.style.display = 'none'; // Скрываем верхнюю кнопку
+    hideButton3.style.display = 'flex'; // Показываем кнопку "Скрыть"
+});
+
+// Обработчик для кнопки "Скрыть"
+hideButton3.addEventListener('click', function () {
+    additionalItems3.style.display = 'none';
+    showButton3.style.display = 'flex'; // Показываем верхнюю кнопку
+    hideButton3.style.display = 'none'; // Скрываем кнопку "Скрыть"
+});
 
 
 
