@@ -86,6 +86,10 @@ a:hover {
   transition: .3s ease all;
 }
 
+.icon img{
+  height: 20px;
+}
+
 .button:hover {
   background-color: #FFE0E9;
 }
@@ -254,7 +258,8 @@ a:hover {
   align-items: center;
 }
 
-.button__item:not(:last-child) {
+.button__item:not(:last-child),
+.navigation-button:not(:last-child) {
   margin-right: 16px;
 }
 
@@ -468,8 +473,7 @@ a:hover {
   color: #1B1C21;
 }
 
-.toggle-button.hidden,
-.section-type__button.hidden{
+.toggle-button.hidden{
   display: none;
   margin-top: 10px;
 }
@@ -563,6 +567,7 @@ a:hover {
 
 
 .section-type {
+  display: none;
   margin-right: 32px;
   margin-bottom: 16px;
   max-width: 240px;
@@ -572,6 +577,10 @@ a:hover {
   border-radius: 6px;
   padding: 16px;
   background-color: #fff;
+}
+
+.section-type.visible{
+  display: inline-block;
 }
 
 
@@ -707,6 +716,8 @@ a:hover {
 .section-services {
   padding-bottom: 40px;
 }
+
+
 
 .footer-blocks {
   padding-top: 32px;
@@ -1031,7 +1042,6 @@ a:hover {
     animation: burgerAnimation .4s;
   }
 
-
   .navigation-wrapper.open {
     position: fixed;
     top: 0;
@@ -1232,6 +1242,19 @@ a:hover {
 
 }
 
+@media only screen and (max-width: 1024px){
+
+  .brands-item.visible{
+    max-width: 188px;
+  }
+
+  .section-type{
+    margin-right: 15px;
+    max-width: 190px;
+  }
+
+
+}
 
 @media only screen and (max-width: 760px) {
   .section-nav__items {
@@ -1332,6 +1355,11 @@ a:hover {
     margin-bottom: 50px;
   }
 
+  .brands-button__more,
+  .section-type__button{
+    display: none !important;
+  }
+
 /* ----------------  /brands-block  ----------------*/
   
   .brands-inner{
@@ -1343,20 +1371,6 @@ a:hover {
     margin-bottom: 25px;
   }
 
-  .brands-button{
-    display: none;
-  }
-
-  .brands-button__more,
-  .section-type__button{
-    display: none;
-  }
-
-  .brands-button__more{
-    display: none !important;
-  }
-
-
   
 /* ----------------  /brands-block  ----------------*/
 
@@ -1367,6 +1381,7 @@ a:hover {
 
   .section-type{
     height: 110px;
+    max-width: 100%;
   }
 
   .services-items__wrapper.swiper-wrapper{
