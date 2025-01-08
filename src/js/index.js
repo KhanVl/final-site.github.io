@@ -2,27 +2,31 @@ import '../scss/style.scss'
 
 console.log('Works!')
 
+let swiper = null; 
 
 function initSwiper() {
     if (window.innerWidth < 761) {
-        swiper = new Swiper('.swiper', {
-            direction: 'horizontal',
-            slidesPerView: 1.2,
-            spaceBetween: 7,
-            loop: true,
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-        });
-    } else if (swiper) {
-        swiper.destroy(); // Уничтожаем Swiper, если он уже инициализирован
-        swiper = null; // Обнуляем переменную
+        if (!swiper) { 
+            swiper = new Swiper('.swiper', {
+                direction: 'horizontal',
+                slidesPerView: 1.2,
+                spaceBetween: 7,
+                loop: true,
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+            });
+        }
+    } else if (swiper instanceof Swiper) { 
+        swiper.destroy();
+        swiper = null;
     }
 }
 
 window.addEventListener('resize', initSwiper);
 window.addEventListener('load', initSwiper);
+
 
 
 const showButton1 = document.querySelector('.toggle-button:not(.hidden)');
@@ -65,29 +69,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-document.querySelectorAll('.button.navigation__burger, .button.popup__close, .button.call__close').forEach(function(element) {
-    element.addEventListener('click', function() {
-        this.classList.toggle('none');
-
-        if (this.classList.contains('navigation__burger')) {
-            document.querySelector('.navigation-wrapper').classList.toggle('open');
-            document.querySelector('.navigation__overlay').classList.toggle('open');
-            document.querySelector('.navigation').classList.toggle('open');
-        }
-
-        if (this.classList.contains('popup__close')) {
-            document.querySelector('.app-header__popup').classList.toggle('open');
-            document.querySelector('.app-header__wrapper').classList.toggle('open');
-            document.querySelector('.app-header__overlay').classList.toggle('open');
-        }
-
-        if (this.classList.contains('call__close')) {
-            document.querySelector('.app-header__call').classList.toggle('open');
-            document.querySelector('.app-header__call-wrapper').classList.toggle('open');
-            document.querySelector('.app-header__call-overlay').classList.toggle('open');
-        }
-    });
-});
 
 
 // Функция для переключения классов, управляющих видимостью окна сообщений
