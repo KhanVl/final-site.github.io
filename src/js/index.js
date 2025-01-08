@@ -46,39 +46,42 @@ hideButton1.addEventListener('click', function () {
 });
 
 
-
-document.querySelector('.app-header__burger').addEventListener('click', function(event) {
-    event.stopPropagation(); 
+document.querySelector('.app-header__burger').addEventListener('click', function (event) {
+    event.stopPropagation();
     this.classList.toggle('active');
     document.querySelector('.navigation-wrapper').classList.toggle('open');
     document.querySelector('.navigation__overlay').classList.toggle('open');
     document.querySelector('.navigation').classList.toggle('open');
 });
 
-document.addEventListener('click', function(event) {
+document.addEventListener('click', function (event) {
     const navigationWrapper = document.querySelector('.navigation-wrapper');
-    const navigationBurger = document.querySelector('.navigation__burger');
-    const isClickInside = navigationWrapper.contains(event.target);
+    const navigationBurger = document.querySelector('.button.navigation__burger');
+    const isClickInside = navigationWrapper.contains(event.target); 
     const isBurgerClick = navigationBurger.contains(event.target);
 
     if (!isClickInside && !isBurgerClick) {
-        navigationWrapper.classList.remove('open');
-        document.querySelector('.navigation__overlay').classList.remove('open');
-        document.querySelector('.navigation').classList.remove('open');
-        navigationBurger.classList.remove('active');
+        closeNavigation();
     }
 });
 
+document.querySelector('.button.navigation__burger').addEventListener('click', closeNavigation);
+
+function closeNavigation() {
+    document.querySelector('.navigation-wrapper').classList.remove('open');
+    document.querySelector('.navigation__overlay').classList.remove('open');
+    document.querySelector('.navigation').classList.remove('open');
+    document.querySelector('.app-header__burger').classList.remove('active');
+}
 
 
-// Функция для переключения классов, управляющих видимостью окна сообщений
+
 function toggleMessageModal() {
     document.querySelector('.app-header__popup').classList.toggle('open');
     document.querySelector('.app-header__wrapper').classList.toggle('open');
     document.querySelector('.app-header__overlay').classList.toggle('open');
 }
 
-// Обработчик для кнопок вызова окна сообщений
 document.querySelectorAll('.button__item.message, .navigation-button.message').forEach(function (element) {
     element.addEventListener('click', function () {
         this.classList.toggle('active');
@@ -86,27 +89,23 @@ document.querySelectorAll('.button__item.message, .navigation-button.message').f
     });
 });
 
-// Обработчик для кнопки закрытия окна сообщений
 document.querySelector('.button.popup__close').addEventListener('click', function (event) {
-    event.preventDefault(); // Предотвращаем переход по ссылке
+    event.preventDefault(); 
     toggleMessageModal();
 });
 
-// Обработчик для клика по затемнённому фону окна сообщений
 document.querySelector('.app-header__popup').addEventListener('click', function (event) {
     if (event.target === this) {
         toggleMessageModal();
     }
 });
 
-// Функция для переключения классов, управляющих видимостью окна звонка
 function toggleCallModal() {
     document.querySelector('.app-header__call').classList.toggle('open');
     document.querySelector('.app-header__call-wrapper').classList.toggle('open');
     document.querySelector('.app-header__call-overlay').classList.toggle('open');
 }
 
-// Обработчик для кнопок вызова окна звонка
 document.querySelectorAll('.button__item.call, .navigation-button.call').forEach(function (element) {
     element.addEventListener('click', function () {
         this.classList.toggle('active');
@@ -114,13 +113,11 @@ document.querySelectorAll('.button__item.call, .navigation-button.call').forEach
     });
 });
 
-// Обработчик для кнопки закрытия окна звонка
 document.querySelector('.button.call__close').addEventListener('click', function (event) {
     event.preventDefault();
     toggleCallModal();
 });
 
-// Обработчик для клика по затемнённому фону окна звонка
 document.querySelector('.app-header__call').addEventListener('click', function (event) {
     if (event.target === this) {
         toggleCallModal();
@@ -158,10 +155,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Инициализация для первого набора элементов
     setupToggle('.brands-item', '.brands-button__more', '.brands-button__hidden', '.icon', 8);
-
-    // Инициализация для второго набора элементов
     setupToggle('.section-type', '.section-type__button', '.section-button__hidden', '.icon', 4);
 });
 
